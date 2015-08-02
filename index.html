@@ -58,21 +58,20 @@
             <li>Functional</li>
             <li>Dynamic</li>
             <li>Scalable</li>
+            <li>Fault Tolerant</li>
             <li>Built on top of Erlang</li>
           </ul>
         </section>
 
         <section>
-        <h2>Things built in Erlang that you may or may not know of</h2>
-        <ul>
-          <li>RabbitMQ</li>
-          <li>CouchDB</li>
-          <li>WhatsApp (32 devs, 50 billion messages/day)</li>
-          <li>Call of Duty: Black Ops servers</li>
-          <li>Facebook Chat*</li>
-        </ul>
+          <h1>So what is Erlang?</h1>
+          <ul>
+            <li>Created in 1986 at Ericsson</li>
+            <li>Designed for Telephony Systems</li>
+            <li>Open sourced in 1998</li>
+            <li>Actor model of concurrency</li>
+          </ul>
         </section>
-
 
         <section>
         <h1>Why do I like it?</h1>
@@ -81,7 +80,19 @@
           <li>Makes functional accessible</li>
           <li>Lots of opportunities to contribute</li>
           <li>Massively concurrent. Possibilty of doing large calculations fast</li>
-          <li>High availability, automatic recovery is easy</li>
+          <li>High availability, automatic recovery is baked in</li>
+        </ul>
+        </section>
+
+        <section>
+        <h2>Things built in Erlang that you may or may not know of</h2>
+        <ul>
+          <li>RabbitMQ</li>
+          <li>CouchDB</li>
+          <li>Riak</li>
+          <li>WhatsApp (32 devs, 50 billion messages/day)</li>
+          <li>Call of Duty: Black Ops servers</li>
+          <li>Facebook Chat*</li>
         </ul>
         </section>
 
@@ -115,9 +126,9 @@ false               # boolean
         <h2>Named and Anonymous Functions</h2>
         <pre><code data-trim contenteditable>
 defmodule Case do
-  def uppercase(param)
+  def uppercase(value)
     to_upper = fn(s) -> String.upcase(s) end
-    to_upper.(param)
+    to_upper.(value)
   end
 end
 
@@ -189,27 +200,6 @@ end
         </section>
 
         <section>
-        <h2>What would that look like in Ruby?</h2>
-        <pre><code data-trim contenteditable>
-module AppConfiguration
-  def load
-    config_file = '~/.config'
-    return { default: 'config' } unless File.exist?(config_file)
-
-    Yaml.parse File.read(config_file)
-  end
-end
-        </code></pre>
-        </section>
-
-        <section>
-        <h2>And how about C#?</h2>
-        <pre><code data-trim contenteditable>
-???
-        </code></pre>
-        </section>
-
-        <section>
         <h2>Metaprogramming</h2>
         <h3>A simple router DSL</h3>
         <pre><code data-trim contenteditable>
@@ -220,7 +210,7 @@ defmodule SimpleRouter do
 
   def compile_route(method, path, f) do
     quote do
-      def _route(method, unquote(path |> String.split("/"))) do
+      def _route(unquote(method), unquote(path |> String.split("/"))) do
         unquote(f)
       end
     end
@@ -261,8 +251,25 @@ spawn(:"other_node@host", say_hello)
         </ul>
         </section>
 
+
         <section>
-        <h2>Latest techniques baked into the Erlang VM</h2>
+        <h2>Supervision Tree</h2>
+        <img src="supervision_tree.png" />
+        </section>
+
+        <section>
+        <h2>Open Telecom Platform (OTP)</h2>
+        <ul>
+          <li>Supervision trees</li>
+          <li>Distributed database server</li>
+          <li>Hot swapping of code</li>
+          <li>GenServer, GenFSM, GenTCP, etc</li>
+        </ul>
+        </section>
+
+
+        <section>
+        <h2>Modern techniques out of the box</h2>
         <ul>
           <li>Microservices => OTP Applications</li>
           <li>Zero Downtime Deploys => Hot Swapping</li>
@@ -280,8 +287,8 @@ spawn(:"other_node@host", say_hello)
           <li>Hex => Gem</li>
           <li>ExUnit => Unit Testing</li>
           <li>Ecto => Database DSL</li>
-          <li>Phoenix => Web Framework (MVC + Channels)</li>
           <li>Plug => HTTP Pipeline (Rack, OWIN, WSGI)</li>
+          <li>Phoenix => Web Framework (MVC + Channels)</li>
         </ul>
         </section>
 
