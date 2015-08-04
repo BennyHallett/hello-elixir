@@ -267,6 +267,33 @@ spawn(:"other_node@host", say_hello)
         </ul>
         </section>
 
+        <section>
+        <code><pre>
+defmodule Counter
+  use GenServer
+
+  def start_link(_opts) do
+    GenServer.start_link(__MODULE__, 0, name: :counter)
+  end
+
+  def next do
+    GenServer.call :counter, :next
+  end
+
+  def handle_call(:counter, current_count)
+    {:reply, current_count, current_count + 1}
+  end
+end
+
+Counter.start_link
+
+Counter.next
+# => 0
+
+Counter.next
+# => 1
+        </pre></code>
+        </section>
 
         <section>
         <h2>Modern techniques out of the box</h2>
@@ -290,6 +317,23 @@ spawn(:"other_node@host", say_hello)
           <li>Plug => HTTP Pipeline (Rack, OWIN, WSGI)</li>
           <li>Phoenix => Web Framework (MVC + Channels)</li>
         </ul>
+        </section>
+
+        <section>
+          <h2>Resources</h2>
+          <ul>
+            <li>http://elixir-lang.org</li>
+            <li>http://phoenixframework.org</li>
+            <li>http://learnyousomeerlang.com</li>
+            <li>http://erlang-in-anger.com</li>
+          </ul>
+          <br />
+          <br />
+          <h2>Books</h2>
+          <ul>
+            <li>Programming Elixir - Dave Thomas</li>
+            <li>Metaprogramming Elixir - Chris McCord</li>
+          </ul>
         </section>
 
 			</div>
